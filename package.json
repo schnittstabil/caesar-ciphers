@@ -1,0 +1,53 @@
+{
+  "name": "caesar-ciphers",
+  "version": "0.1.0",
+  "description": "Multiple implementations of the Caesar Cipher.",
+  "homepage": "https://github.com/schnittstabil/caesar-ciphers",
+  "keywords": [
+    "ceasar",
+    "chipher"
+  ],
+  "author": {
+    "name": "Michael Mayer",
+    "email": "michael@schnittstabil.de",
+    "url": "http://schnittstabil.de"
+  },
+  "licenses": [
+    {
+      "type": "MIT",
+      "url": "https://github.com/schnittstabil/caesar-ciphers/blob/master/LICENSE"
+    }
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:schnittstabil/caesar-ciphers.git"
+  },
+  "bugs": {
+    "url": "https://github.com/schnittstabil/caesar-ciphers/issues"
+  },
+  "preferGlobal": true,
+  "main": "./lib/index.js",
+  "directories": {
+    "lib":"./lib",
+    "bin":"./bin"
+  },
+  "bin": {
+    "caesar-ciphers": "bin/caesar-ciphers.js"
+  },
+  "scripts": {
+    "test": "grunt test"
+  },
+  "engines": {
+    "node": ">= 0.8.0"
+  },
+  "devDependencies": {
+    "grunt": "~0.4.2",
+    "grunt-contrib-jshint": "~0.8.0",
+    "grunt-contrib-nodeunit": "~0.3.2",
+    "grunt-contrib-watch": "~0.5.3",
+    "grunt-githooks": "~0.3.1"
+  },
+  "dependencies": {
+    "optimist": "~0.6.0"
+  }
+}
