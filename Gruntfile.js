@@ -7,6 +7,14 @@ module.exports = function(grunt) {
     nodeunit: {
       files: ['test/**/*_test.js'],
     },
+    jsdoc: {
+      dist: {
+        src: ['lib/*.js', 'test/*.js'],
+        options: {
+          destination: 'doc'
+        }
+      }
+    },
     jshint: {
       options: {
         jshintrc: '.jshintrc'
@@ -55,11 +63,12 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-jshint');
   grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-githooks');
+  grunt.loadNpmTasks('grunt-jsdoc');
 
   // Alias tasks.
   grunt.registerTask('test', ['nodeunit']);
 
   // Default task.
-  grunt.registerTask('default', ['jshint', 'test']);
+  grunt.registerTask('default', ['jshint', 'test', 'jsdoc']);
 
 };

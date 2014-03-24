@@ -1,6 +1,6 @@
 'use strict';
 
-var caesarCiphers = require('../lib').stringAppend;
+var caesarCiphers = require('../lib').arrayBuffer;
 
 /*
 ======== A Handy Little Nodeunit Reference ========
@@ -22,7 +22,7 @@ test.doesNotThrow(block, [error], [message])
 test.ifError(value)
 */
 
-exports['string-append'] = {
+exports['array-buffer'] = {
   setUp: function(done) {
     done();
   },
