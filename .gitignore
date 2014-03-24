@@ -13,3 +13,8 @@ results
 
 npm-debug.log
 node_modules
+
+# IDEs
+*~
+caesar-ciphers.sublime-project
+caesar-ciphers.sublime-workspace
