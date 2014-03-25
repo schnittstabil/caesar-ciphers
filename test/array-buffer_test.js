@@ -28,17 +28,17 @@ exports['array-buffer'] = {
   },
   'encrypting a-z patterns should work': function(test) {
     test.expect(4);
-    test.equal(caesarCiphers.encrypt(1, 'abc'), 'bcd');
+    test.equal((new caesarCiphers(1)).encrypt('abc'), 'bcd');
     test.equal(
-      caesarCiphers.encrypt(0, 'abcdefghijklmnopqrstuvwxyz'),
+      new caesarCiphers(0).encrypt('abcdefghijklmnopqrstuvwxyz'),
       'abcdefghijklmnopqrstuvwxyz'
     );
     test.equal(
-      caesarCiphers.encrypt(1, 'abcdefghijklmnopqrstuvwxyz'),
+      new caesarCiphers(1).encrypt('abcdefghijklmnopqrstuvwxyz'),
       'bcdefghijklmnopqrstuvwxyza'
     );
     test.equal(
-      caesarCiphers.encrypt(26, 'abcdefghijklmnopqrstuvwxyz'),
+      new caesarCiphers(26).encrypt('abcdefghijklmnopqrstuvwxyz'),
       'abcdefghijklmnopqrstuvwxyz'
     );
     test.done();
@@ -46,20 +46,20 @@ exports['array-buffer'] = {
   'decrypting a-z patterns should work': function(test) {
     test.expect(2);
     test.equal(
-      caesarCiphers.decrypt(0, 'abcdefghijklmnopqrstuvwxyz'),
+      new caesarCiphers(0).decrypt('abcdefghijklmnopqrstuvwxyz'),
       'abcdefghijklmnopqrstuvwxyz'
     );
-    test.equal(caesarCiphers.decrypt(1, 'bcd'), 'abc');
+    test.equal(new caesarCiphers(1).decrypt('bcd'), 'abc');
     test.done();
   },
   'encrypting and decrypting email addresses should work': function(test) {
     test.expect(2);
     test.equal(
-      caesarCiphers.encrypt(1, 'schnittstabil@example.com'),
+      new caesarCiphers(1).encrypt('schnittstabil@example.com'),
       'tdiojuutubcjm@fybnqmf.dpn'
     );
     test.equal(
-      caesarCiphers.decrypt(1, 'tdiojuutubcjm@fybnqmf.dpn'),
+      new caesarCiphers(1).decrypt('tdiojuutubcjm@fybnqmf.dpn'),
       'schnittstabil@example.com'
     );
     test.done();
