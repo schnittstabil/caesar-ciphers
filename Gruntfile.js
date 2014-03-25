@@ -36,7 +36,6 @@ module.exports = function(grunt) {
     webpack: {
       options: webpackConfig,
       build: {
-        plugins: webpackConfig.plugins,
       },
       'build-dev': {
         debug: true,

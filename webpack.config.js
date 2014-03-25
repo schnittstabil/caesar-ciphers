@@ -1,5 +1,6 @@
 var path = require("path");
 var webpack = require("webpack");
+var fs = require("fs");
 
 module.exports = {
   cache: true,
@@ -17,6 +18,10 @@ module.exports = {
   devtool: "#sourcemap",
   plugins: [
     new webpack.optimize.DedupePlugin(),
-    new webpack.optimize.UglifyJsPlugin()
+    new webpack.optimize.UglifyJsPlugin(),
+    new webpack.BannerPlugin(
+      fs.readFileSync("./LICENSE.banner", {encoding: 'utf8'}),
+      { entryOnly: false }
+    ),
   ],
 };
