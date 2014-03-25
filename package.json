@@ -30,7 +30,7 @@
   "directories": {
     "bin": "./bin",
     "doc": "./doc",
-    "lib": "./lib",
+    "lib": "./lib"
   },
   "bin": {
     "caesar-ciphers": "bin/caesar-ciphers.js"
@@ -50,6 +50,6 @@
     "grunt-jsdoc": "~0.5.4"
   },
   "dependencies": {
-    "optimist": "~0.6.0"
+    "yargs": "~1.2.1"
   }
 }

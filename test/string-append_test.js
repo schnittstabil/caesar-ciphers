@@ -1,6 +1,6 @@
 'use strict';
 
-var caesarCiphers = require('../lib').stringAppend;
+var caesarCiphers = require('../lib').ciphers.stringAppend;
 
 /*
 ======== A Handy Little Nodeunit Reference ========
