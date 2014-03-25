@@ -1,6 +1,7 @@
 'use strict';
 
 module.exports = function(grunt) {
+  var webpackConfig = require('./webpack.config.js');
 
   // Project configuration.
   grunt.initConfig({
@@ -30,6 +31,31 @@ module.exports = function(grunt) {
       },
       test: {
         src: ['test/**/*.js']
+      },
+    },
+    webpack: {
+      options: webpackConfig,
+      build: {
+        plugins: webpackConfig.plugins,
+      },
+      'build-dev': {
+        debug: true,
+      },
+    },
+    'webpack-dev-server': {
+      options: {
+        webpack: webpackConfig,
+        publicPath: '/' + webpackConfig.output.publicPath,
+        debug: true,
+      },
+      start: {
+        webpack: {
+        },
+        keepAlive: true,
+        contentBase: './public',
+        stats: {
+          colors: true
+        },
       },
     },
     watch: {
@@ -64,13 +90,16 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-githooks');
   grunt.loadNpmTasks('grunt-jsdoc');
+  grunt.loadNpmTasks('grunt-webpack');
 
   // Alias tasks.
   grunt.registerTask('test', ['nodeunit']);
   grunt.registerTask('lint', ['jshint']);
   grunt.registerTask('doc', ['jsdoc']);
+  grunt.registerTask('dist', ['webpack:build']);
+  grunt.registerTask('dev-server', ['webpack-dev-server']);
 
   // Default task.
-  grunt.registerTask('default', ['lint', 'test', 'doc']);
+  grunt.registerTask('default', ['test', 'dist', 'lint', 'doc']);
 
 };

@@ -54,6 +54,9 @@ grunt
 
 # or auto-build whenever watched files change
 grunt watch
+
+# or start the dev-server and open http://localhost:8080/
+grunt dev-server
 ```
 
 
