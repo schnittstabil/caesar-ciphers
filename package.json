@@ -28,8 +28,9 @@
   "preferGlobal": true,
   "main": "./lib/index.js",
   "directories": {
+    "bin": "./bin",
+    "doc": "./doc",
     "lib": "./lib",
-    "bin": "./bin"
   },
   "bin": {
     "caesar-ciphers": "bin/caesar-ciphers.js"
