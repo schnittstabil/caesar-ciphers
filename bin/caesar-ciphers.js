@@ -2,7 +2,7 @@
 
 'use strict';
 
-var caesarCiphers = require('../lib');
+var caesarCiphers = require('../');
 
 // argv parsing
 var argv = require('yargs')
