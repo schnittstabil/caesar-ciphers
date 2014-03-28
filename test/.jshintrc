@@ -1,4 +1,12 @@
 {
+  "globals": {
+    /* MOCHA */
+    "before": true,
+    "console": true,
+    "describe": true,
+    "it": true,
+    "require": true
+  },
   "asi":          false,
   "bitwise":      true,
   "boss":         false,
@@ -28,7 +36,6 @@
   "newcap":       true,
   "newcap":       true,
   "noarg":        true,
-  "node":         true,
   "noempty":      true,
   "nomen":        false,
   "onecase":      false,
