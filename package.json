@@ -5,7 +5,8 @@
   "homepage": "https://github.com/schnittstabil/caesar-ciphers",
   "keywords": [
     "ceasar",
-    "chipher"
+    "chipher",
+    "cli"
   ],
   "author": {
     "name": "Michael Mayer",
@@ -30,13 +31,23 @@
   "directories": {
     "bin": "./bin",
     "doc": "./doc",
+    "dist": "./dist",
     "lib": "./lib"
   },
   "bin": {
     "caesar-ciphers": "bin/caesar-ciphers.js"
   },
+  "testling": {
+    "harness": "mocha-bdd",
+    "files": "test/lib/*.js",
+    "browsers": [
+      "ie/8..latest",
+      "chrome/latest",
+      "firefox/latest"
+    ]
+  },
   "scripts": {
-    "test": "grunt test"
+    "test": "grunt testall"
   },
   "engines": {
     "node": ">= 0.8.0"
@@ -44,13 +55,18 @@
   "devDependencies": {
     "grunt": "~0.4.2",
     "grunt-contrib-jshint": "~0.8.0",
-    "grunt-contrib-nodeunit": "~0.3.2",
     "grunt-contrib-watch": "~0.5.3",
     "grunt-githooks": "~0.3.1",
     "grunt-jsdoc": "~0.5.4",
     "webpack-dev-server": "~1.2.4",
     "webpack": "~1.1.0-beta12",
-    "grunt-webpack": "~1.0.5"
+    "grunt-webpack": "~1.0.5",
+    "time-grunt": "~0.3.1",
+    "jscover": "~0.2.4",
+    "grunt-jscover": "0.0.1",
+    "grunt-mocha-test": "~0.10.0",
+    "grunt-contrib-clean": "~0.5.0",
+    "mocha": "~1.18.2"
   },
   "dependencies": {
     "yargs": "~1.2.1"
