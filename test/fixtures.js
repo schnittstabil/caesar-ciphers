@@ -30,36 +30,36 @@ function charRange(startChar, endChar){
 
 var assert = require('assert'),
   defaultTestFixtures = [
-    {
-      encrypting: ' ',
-      withShift: 1,
-      returns: ' '
-    },
-    {
-      encrypting: '',
-      withShift: 13,
-      returns: ''
-    },
-    {
-      encrypting: charRange('a','z'),
-      withShift: 1,
-      returns: charRange('b','z')+'a'
-    },
-    {
-      encrypting: charRange('a','z'),
-      withShift: 26,
-      returns: charRange('a','z')
-    },
+    // {
+    //   encrypting: ' ',
+    //   withShift: 1,
+    //   returns: ' '
+    // },
+    // {
+    //   encrypting: '',
+    //   withShift: 13,
+    //   returns: ''
+    // },
+    // {
+    //   encrypting: charRange('a','z'),
+    //   withShift: 1,
+    //   returns: charRange('b','z')+'a'
+    // },
+    // {
+    //   encrypting: charRange('a','z'),
+    //   withShift: 26,
+    //   returns: charRange('a','z')
+    // },
     {
       encrypting: 'bcd',
       withShift: -1,
       returns: 'abc'
     },
-    {
-      encrypting: ' ' + charRange('A','Z') + ' ',
-      withShift: 1,
-      returns: ' ' + charRange('B','Z')+'A '
-    },
+    // {
+    //   encrypting: ' ' + charRange('A','Z') + ' ',
+    //   withShift: 1,
+    //   returns: ' ' + charRange('B','Z')+'A '
+    // },
     {
       encrypting: 'user@example.com',
       withShift: 1,

@@ -1,6 +1,6 @@
 'use strict';
 
-var caesarCiphers = require('../../'),
+var caesarCiphers = require('../../lib'),
   fixtures = require('../fixtures'),
   suite = new fixtures.FixtureSuite(
     function(cipherName, method, shift, input, done){

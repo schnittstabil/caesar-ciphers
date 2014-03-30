@@ -9,16 +9,13 @@ module.exports = function(grunt) {
     webpack = require('webpack'),
     webpackConfig = {
       cache: true,
-      context: path.join(__dirname, 'lib'),
-      entry: {
-        'caesarCiphers': './index.js',
-      },
+      context: '<%= deamdefine.dest %>',
       output: {
         library : 'caesarCiphers',
-        path: path.join(__dirname, 'dist'),
-        publicPath: '<%= pkg.directories.dist %>/',
+        path: path.join(__dirname, 'dist', 'webpacked'),
+        publicPath: 'dist/',
         filename: '[name].js',
-        chunkFilename: '[chunkhash].js'
+        chunkFilename: '[id].js'
       },
       devtool: '#sourcemap',
       plugins: [
@@ -105,11 +102,46 @@ module.exports = function(grunt) {
         src: ['test/**/*.js']
       },
     },
+    deamdefine:{
+      dest: 'dist/deamdefined',
+      process: function(content) {
+        /* jshint -W101 */
+        return content.replace(
+          /if\s*\(\s*typeof define\s*\!==\s*'function'\s*\)\s*\{\s*[^\{\}]+amdefine[^\{\}]+\}\s*/g,
+          ''
+          );
+        /* jshint +W101 */
+      },
+    },
+    copy:{
+      deamdefineLib: {
+        expand: true,
+        src: 'lib/**',
+        dest: '<%= deamdefine.dest %>',
+        options: {
+          process: '<%= deamdefine.process %>',
+        },
+      },
+      deamdefineTest: {
+        expand: true,
+        src: 'test/**',
+        dest: '<%= deamdefine.dest %>',
+        options: {
+          process: '<%= deamdefine.process %>',
+        },
+      },
+    },
     webpack: {
       options: webpackConfig,
       build: {
+        entry: {
+          'caesar-ciphers': './lib/index.js',
+        },
       },
-      'build-dev': {
+      test: {
+        entry: {
+          'caesar-ciphers_tests': './test/lib/caesar-ciphers_test.js',
+        },
         debug: true,
       },
     },
@@ -121,6 +153,9 @@ module.exports = function(grunt) {
       },
       start: {
         webpack: {
+          entry: {
+            'caesar-ciphers_tests': './test/lib/caesar-ciphers_test.js',
+          },
         },
         keepAlive: true,
         contentBase: './public',
@@ -163,6 +198,7 @@ module.exports = function(grunt) {
 
   // These plugins provide necessary tasks.
   grunt.loadNpmTasks('grunt-contrib-clean');
+  grunt.loadNpmTasks('grunt-contrib-copy');
   grunt.loadNpmTasks('grunt-contrib-jshint');
   grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-githooks');
@@ -173,8 +209,15 @@ module.exports = function(grunt) {
 
   // Alias tasks.
   grunt.registerTask('code-coverage', ['jscover']);
-  grunt.registerTask('dev-server', ['webpack-dev-server']);
-  grunt.registerTask('dist', ['webpack:build']);
+  grunt.registerTask(
+    'deamdefine',
+    ['copy:deamdefineLib', 'copy:deamdefineTest']
+  );
+  grunt.registerTask(
+    'dev-server',
+    ['clean', 'deamdefine', 'webpack-dev-server']
+  );
+  grunt.registerTask('dist', ['clean', 'deamdefine', 'webpack:build']);
   grunt.registerTask('doc', ['jsdoc']);
   grunt.registerTask('lint', ['jshint']);
   grunt.registerTask('test', ['mochaTest:lib']);
