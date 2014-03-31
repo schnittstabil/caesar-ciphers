@@ -1,4 +1,8 @@
 {
+  "globals": {
+    /* amdefine */
+    "define":     true
+  },
   "asi":          false,
   "bitwise":      true,
   "boss":         false,

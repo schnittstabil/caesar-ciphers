@@ -21,7 +21,7 @@ var argv = require('yargs')
   .describe('d', 'set debug mode')
   .options('i', {
     alias: 'implemenation',
-    default: 'arrayBuffer'
+    default: caesarCiphers.getDefaultId(),
   })
   .check(function(argv){
     // check command
@@ -35,6 +35,11 @@ var argv = require('yargs')
       if(argv._.length < 2){
         throw('Not enough non-option arguments: missing text');
       }
+      // check implementation option
+      argv.cipher = caesarCiphers.get(argv.implemenation);
+      if(typeof argv.cipher === 'undefined'){
+        throw('unknown implementation: ' + argv.implemenation);
+      }
       // parsing text
       argv.text = argv._[1];
       argv.command = command;
@@ -44,11 +49,6 @@ var argv = require('yargs')
       break;
     default:
       throw('unknown command: ' + command);
-    }
-    // check options
-    argv.cipher = caesarCiphers.ciphers[argv.implemenation];
-    if(typeof argv.cipher === 'undefined'){
-      throw('unknown implementation: ' + argv.implemenation);
     }
   })
   .argv;
@@ -67,8 +67,8 @@ try{
   case 'list':
     console.log('Cipher Implementations:');
     console.log('=======================');
-    Object.keys(caesarCiphers.ciphers).forEach(function(key){
-      console.log(key);
+    caesarCiphers.getIds().forEach(function(id){
+      console.log(id);
     });
     break;
   }

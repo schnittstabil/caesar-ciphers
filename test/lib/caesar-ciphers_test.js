@@ -1,11 +1,32 @@
-'use strict';
+/* istanbul ignore else */
+if (typeof define !== 'function') { var define = require('amdefine')(module); }
 
-var caesarCiphers = require('../../lib'),
-  fixtures = require('../fixtures'),
-  suite = new fixtures.FixtureSuite(
-    function(cipherName, method, shift, input, done){
-      done(new caesarCiphers.ciphers[cipherName](shift)[method](input));
-    }
-  );
+define(['../../lib/caesar-ciphers', '../fixture-suite', 'chai'],
+  function(caesarCiphers, FixtureSuite, chai) {
+    'use strict';
 
-suite.describeCiphers('api', Object.keys(caesarCiphers.ciphers));
+    var expect = chai.expect,
+        suite = new FixtureSuite(
+          function(cipherName, method, shift, input, done){
+            var caesarCipher = new (caesarCiphers.get(cipherName))(shift);
+            done(caesarCipher[method](input));
+          }
+        );
+
+    suite.describeCiphers('api', caesarCiphers.getIds());
+
+    describe('caesarCiphers defaultId', function(){
+      it('should be valid', function(){
+        expect(caesarCiphers.getIds()).to.include(caesarCiphers.getDefaultId());
+      });
+    });
+
+    describe('caesarCiphers defaultId', function(){
+      it('should reference default implementation', function(){
+        var id = caesarCiphers.getDefaultId();
+        expect(caesarCiphers.get(id)).to.eql(caesarCiphers.get());
+      });
+    });
+
+  }
+);

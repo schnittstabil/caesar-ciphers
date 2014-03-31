@@ -38,12 +38,16 @@
     "caesar-ciphers": "bin/caesar-ciphers.js"
   },
   "testling": {
-    "harness": "mocha-bdd",
-    "files": "test/lib/*.js",
+    "html": "test/mocha.html",
     "browsers": [
-      "ie/8..latest",
-      "chrome/latest",
-      "firefox/latest"
+      "ie/6..latest",
+      "chrome/28..latest",
+      "firefox/20..latest",
+      "safari/4..latest",
+      "iphone/6..latest",
+      "ipad/6..latest",
+      "opera/10..latest",
+      "android-browser/4.2..latest"
     ]
   },
   "scripts": {
@@ -53,22 +57,21 @@
     "node": ">= 0.8.0"
   },
   "devDependencies": {
-    "grunt": "~0.4.2",
+    "almond": "~0.2.9",
+    "amdefine": "~0.1.0",
+    "chai": "~1.9.1",
+    "grunt": "~0.4.4",
+    "grunt-contrib-clean": "~0.5.0",
+    "grunt-contrib-copy": "~0.5.0",
     "grunt-contrib-jshint": "~0.8.0",
+    "grunt-contrib-requirejs": "~0.4.3",
     "grunt-contrib-watch": "~0.5.3",
     "grunt-githooks": "~0.3.1",
-    "grunt-jsdoc": "~0.5.4",
-    "webpack-dev-server": "~1.2.4",
-    "webpack": "~1.1.0-beta12",
-    "grunt-webpack": "~1.0.5",
-    "time-grunt": "~0.3.1",
-    "jscover": "~0.2.4",
-    "grunt-jscover": "0.0.1",
+    "grunt-mocha-istanbul": "~1.2.0",
     "grunt-mocha-test": "~0.10.0",
-    "grunt-contrib-clean": "~0.5.0",
     "mocha": "~1.18.2",
-    "amdefine": "~0.1.0",
-    "grunt-contrib-copy": "~0.5.0"
+    "requirejs": "~2.1.11",
+    "time-grunt": "~0.3.1"
   },
   "dependencies": {
     "yargs": "~1.2.1"

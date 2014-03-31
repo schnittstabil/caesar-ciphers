@@ -4,29 +4,6 @@ module.exports = function(grunt) {
   // Report the elapsed execution time of tasks.
   require('time-grunt')(grunt);
 
-  // webpack config
-  var path = require('path'),
-    webpack = require('webpack'),
-    webpackConfig = {
-      cache: true,
-      context: '<%= deamdefine.dest %>',
-      output: {
-        library : 'caesarCiphers',
-        path: path.join(__dirname, 'dist', 'webpacked'),
-        publicPath: 'dist/',
-        filename: '[name].js',
-        chunkFilename: '[id].js'
-      },
-      devtool: '#sourcemap',
-      plugins: [
-        new webpack.optimize.DedupePlugin(),
-        new webpack.optimize.UglifyJsPlugin(),
-        new webpack.BannerPlugin(
-          '<%= meta.banner %>', { entryOnly: false, raw: true }
-        ),
-      ],
-    };
-
   // Project configuration.
   grunt.initConfig({
     pkg: grunt.file.readJSON('package.json'),
@@ -50,37 +27,71 @@ module.exports = function(grunt) {
         ' */\n\n'
     },
     clean: {
-      build: {
-        src: ['<%= pkg.directories.dist %>', '<%= pkg.directories.doc %>']
-      }
+      dist: {
+        src: ['<%= pkg.directories.dist %>']
+      },
+      doc: {
+        src: ['<%= pkg.directories.dist %>/doc']
+      },
+    },
+    requirejs: {
+      compile: {
+        options: {
+          name: '../node_modules/almond/almond',
+          optimize: 'none',
+          // optimize: 'uglify2',
+          // generateSourceMaps: true,
+          // preserveLicenseComments: false,
+          out: './dist/caesar-ciphers.min.js',
+          addDir: './lib',
+          baseUrl: './lib',
+          mainConfigFile: './requirejs-config.js',
+          include: ['caesar-ciphers'],
+        },
+      },
+      'compile-test': {
+        options: {
+          name: 'node_modules/almond/almond',
+          optimize: 'none',
+          out: './dist/caesar-ciphers_tests.js',
+          addDir: './lib',
+          baseUrl: './',
+          mainConfigFile: './requirejs-config.js',
+          include: ['./test/lib/mocha-tests']
+        },
+      },
     },
     mochaTest: {
       bin: {
         options: {
           reporter: 'dot',
         },
-        src: ['test/bin/**/*_test.js']
+        src: ['test/bin/**/*_test.js', '!test/**/*_slow_test.js']
       },
       lib: {
         options: {
           reporter: 'dot',
         },
-        src: ['test/lib/*_test.js']
+        src: ['test/lib/*_test.js', '!test/**/*_slow_test.js']
+      },
+      slow: {
+        options: {
+          reporter: 'dot',
+        },
+        src: ['test/**/*_slow_test.js']
       },
     },
-    jscover: {
-      options: {
-        inputDirectory: 'lib',
-        outputDirectory: 'lib-cov',
-      }
-    },
-    jsdoc: {
-      dist: {
-        src: ['lib/*.js'],
+    yuidoc: {
+      compile: {
+        name: '<%= pkg.name %>',
+        description: '<%= pkg.description %>',
+        version: '<%= pkg.version %>',
+        url: '<%= pkg.homepage %>',
         options: {
-          destination: '<%= pkg.directories.doc %>/api'
-        }
-      }
+          paths: 'lib/',
+          outdir: '<%= pkg.directories.dist %>/doc/api',
+        },
+      },
     },
     jshint: {
       options: {
@@ -99,69 +110,7 @@ module.exports = function(grunt) {
         options: {
           jshintrc: 'test/.jshintrc',
         },
-        src: ['test/**/*.js']
-      },
-    },
-    deamdefine:{
-      dest: 'dist/deamdefined',
-      process: function(content) {
-        /* jshint -W101 */
-        return content.replace(
-          /if\s*\(\s*typeof define\s*\!==\s*'function'\s*\)\s*\{\s*[^\{\}]+amdefine[^\{\}]+\}\s*/g,
-          ''
-          );
-        /* jshint +W101 */
-      },
-    },
-    copy:{
-      deamdefineLib: {
-        expand: true,
-        src: 'lib/**',
-        dest: '<%= deamdefine.dest %>',
-        options: {
-          process: '<%= deamdefine.process %>',
-        },
-      },
-      deamdefineTest: {
-        expand: true,
-        src: 'test/**',
-        dest: '<%= deamdefine.dest %>',
-        options: {
-          process: '<%= deamdefine.process %>',
-        },
-      },
-    },
-    webpack: {
-      options: webpackConfig,
-      build: {
-        entry: {
-          'caesar-ciphers': './lib/index.js',
-        },
-      },
-      test: {
-        entry: {
-          'caesar-ciphers_tests': './test/lib/caesar-ciphers_test.js',
-        },
-        debug: true,
-      },
-    },
-    'webpack-dev-server': {
-      options: {
-        webpack: webpackConfig,
-        publicPath: '/' + webpackConfig.output.publicPath,
-        debug: true,
-      },
-      start: {
-        webpack: {
-          entry: {
-            'caesar-ciphers_tests': './test/lib/caesar-ciphers_test.js',
-          },
-        },
-        keepAlive: true,
-        contentBase: './public',
-        stats: {
-          colors: true
-        },
+        src: ['test/**/*.js', '!test/bower_components/**']
       },
     },
     watch: {
@@ -171,61 +120,57 @@ module.exports = function(grunt) {
       },
       lib: {
         files: '<%= jshint.lib.src %>',
-        tasks: ['doc', 'test']
+        tasks: ['test']
       },
       bin: {
         files: '<%= jshint.bin.src %>',
-        tasks: ['doc', 'test']
+        tasks: ['test']
       },
       test: {
         files: '<%= jshint.test.src %>',
-        tasks: ['doc', 'test']
+        tasks: ['test']
       },
       doc: {
         files: ['<%= jshint.bin.src %>',
                 '<%= jshint.lib.src %>',
                 '<%= jshint.test.src %>'],
-        tasks: ['doc']
+        tasks: ['yuidoc']
       }
     },
     githooks: {
       all: {
-        // Will run the jshint and test:unit tasks at every commit
+        // Will run the jshint and test tasks at every commit
         'pre-commit': 'default'
       }
     },
   });
 
-  // These plugins provide necessary tasks.
-  grunt.loadNpmTasks('grunt-contrib-clean');
-  grunt.loadNpmTasks('grunt-contrib-copy');
-  grunt.loadNpmTasks('grunt-contrib-jshint');
-  grunt.loadNpmTasks('grunt-contrib-watch');
-  grunt.loadNpmTasks('grunt-githooks');
-  grunt.loadNpmTasks('grunt-jscover');
-  grunt.loadNpmTasks('grunt-jsdoc');
-  grunt.loadNpmTasks('grunt-mocha-test');
-  grunt.loadNpmTasks('grunt-webpack');
+  // load grunt tasks
+  for (var key in grunt.file.readJSON('package.json').devDependencies) {
+    if (key !== 'grunt' && key.indexOf('grunt') === 0){
+      grunt.loadNpmTasks(key);
+    }
+  }
+
+  grunt.loadNpmTasks('grunt-contrib-yuidoc');
+  grunt.registerTask('doc', function(){
+    if(!grunt.file.exists('./node_modules/grunt-contrib-yuidoc')){
+      grunt.log.error(
+        'Install Npm module first:\n'+
+        '\tnpm install grunt-contrib-yuidoc'
+      );
+    }else{
+      grunt.task.run(['clean:doc', 'yuidoc']);
+    }
+  });
 
   // Alias tasks.
-  grunt.registerTask('code-coverage', ['jscover']);
-  grunt.registerTask(
-    'deamdefine',
-    ['copy:deamdefineLib', 'copy:deamdefineTest']
-  );
-  grunt.registerTask(
-    'dev-server',
-    ['clean', 'deamdefine', 'webpack-dev-server']
-  );
-  grunt.registerTask('dist', ['clean', 'deamdefine', 'webpack:build']);
-  grunt.registerTask('doc', ['jsdoc']);
+  grunt.registerTask('dist', ['clean', 'requirejs']);
   grunt.registerTask('lint', ['jshint']);
   grunt.registerTask('test', ['mochaTest:lib']);
   grunt.registerTask('testall', ['mochaTest']);
 
-  grunt.registerTask('docall', ['jsdoc', 'code-coverage']);
-
   // Default task.
-  grunt.registerTask('default', ['testall', 'dist', 'lint', 'doc']);
+  grunt.registerTask('default', ['testall', 'dist', 'lint']);
 
 };

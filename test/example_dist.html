@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Caesar-Ciphers - Quick Test Suite</title>
+  <meta charset="utf-8" />
+  <script src="../dist/caesar-ciphers.min.js"></script>
+</head>
+<body>
+  <h1>Caesar-Ciphers</h1>
+  <h2>Quick Test Suite</h2>
+  <table>
+    <tr>
+      <td><label for="implementation">Implementation:</label></td>
+      <td><select id="implementation"></select></td>
+    </tr>
+    <tr>
+      <td><label for="shift">Shift:</label></td>
+      <td><input id="shift" type="number" min="0" max="26" value="1"></td>
+    </tr>
+    <tr>
+      <td><label for="input">Input</label></td>
+      <td><textarea id="input">John.Doe@example.com</textarea></td>
+    </tr>
+    <tr>
+      <td><label for="output">Output:</label></td>
+      <td><div id="output" /></td>
+    </tr>
+  </table>
+
+  <h2>Sources</h2>
+  <ul>
+    <li><a href="../dist/caesar-ciphers.min.js">../dist/caesar-ciphers.min.js</a></li>
+    <li><a href="../dist/caesar-ciphers_tests.js">../dist/caesar-ciphers_tests.js</a></li>
+  </ul>
+  <h2>Tests</h2>
+  <ul>
+    <li><a href="../test/mocha.html">mocha tests</a></li>
+    <li><a href="../test/mocha_dist.html">mocha_dist tests</a></li>
+  </ul>
+
+  <script src="example.js" data-is-dist="true"></script>
+</body>
+</html>
