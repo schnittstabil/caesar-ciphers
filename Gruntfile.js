@@ -49,17 +49,17 @@ module.exports = function(grunt) {
           include: ['caesar-ciphers'],
         },
       },
-      'compile-test': {
-        options: {
-          name: 'node_modules/almond/almond',
-          optimize: 'none',
-          out: './dist/caesar-ciphers_tests.js',
-          addDir: './lib',
-          baseUrl: './',
-          mainConfigFile: './requirejs-config.js',
-          include: ['./test/lib/mocha-tests']
-        },
-      },
+      // 'compile-test': {
+      //   options: {
+      //     name: './node_modules/almond/almond',
+      //     optimize: 'none',
+      //     out: './dist/caesar-ciphers_tests.js',
+      //     addDir: './lib',
+      //     baseUrl: './',
+      //     mainConfigFile: './requirejs-config.js',
+      //     include: ['./test/mocha-browser']
+      //   },
+      // },
     },
     mochaTest: {
       bin: {
@@ -171,6 +171,6 @@ module.exports = function(grunt) {
   grunt.registerTask('testall', ['mochaTest']);
 
   // Default task.
-  grunt.registerTask('default', ['testall', 'dist', 'lint']);
+  grunt.registerTask('default', ['lint', 'testall', 'dist']);
 
 };

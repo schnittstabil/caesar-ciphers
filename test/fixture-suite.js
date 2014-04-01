@@ -1,10 +1,9 @@
 /* istanbul ignore else */
 if (typeof define !== 'function') { var define = require('amdefine')(module); }
 
-define(['chai', './fixtures'],
-  function(chai, fixtures) {
+define(['proclaim', './fixtures'],
+  function(proclaim, fixtures) {
     'use strict';
-    var expect = chai.expect;
 
     // Type Definitions:
     /**
@@ -43,7 +42,7 @@ define(['chai', './fixtures'],
           });
 
           it('should return "' + output + '"', function(){
-            expect(actual).to.equal(output);
+            proclaim.strictEqual(actual, output);
           });
         });
       };

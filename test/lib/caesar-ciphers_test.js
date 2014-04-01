@@ -1,12 +1,11 @@
 /* istanbul ignore else */
 if (typeof define !== 'function') { var define = require('amdefine')(module); }
 
-define(['../../lib/caesar-ciphers', '../fixture-suite', 'chai'],
-  function(caesarCiphers, FixtureSuite, chai) {
+define(['../../lib/caesar-ciphers', '../fixture-suite', 'proclaim', 'mocha'],
+  function(caesarCiphers, FixtureSuite, proclaim) {
     'use strict';
 
-    var expect = chai.expect,
-        suite = new FixtureSuite(
+    var suite = new FixtureSuite(
           function(cipherName, method, shift, input, done){
             var caesarCipher = new (caesarCiphers.get(cipherName))(shift);
             done(caesarCipher[method](input));
@@ -17,14 +16,14 @@ define(['../../lib/caesar-ciphers', '../fixture-suite', 'chai'],
 
     describe('caesarCiphers defaultId', function(){
       it('should be valid', function(){
-        expect(caesarCiphers.getIds()).to.include(caesarCiphers.getDefaultId());
+        proclaim.includes(caesarCiphers.getIds(), caesarCiphers.getDefaultId());
       });
     });
 
     describe('caesarCiphers defaultId', function(){
       it('should reference default implementation', function(){
         var id = caesarCiphers.getDefaultId();
-        expect(caesarCiphers.get(id)).to.eql(caesarCiphers.get());
+        proclaim.equal(caesarCiphers.get(id), caesarCiphers.get());
       });
     });
 

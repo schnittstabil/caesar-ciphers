@@ -1,10 +1,9 @@
 /* istanbul ignore else */
 if (typeof define !== 'function') { var define = require('amdefine')(module); }
 
-define(['../../lib/string-utils', 'chai'],
-  function(stringUtils, chai) {
+define(['../../lib/string-utils', 'proclaim', 'mocha'],
+  function(stringUtils, proclaim) {
     'use strict';
-    var expect = chai.expect;
 
     /* istanbul ignore else */
     if(typeof Uint16Array === 'function'){
@@ -22,7 +21,7 @@ define(['../../lib/string-utils', 'chai'],
           }
 
           actual = stringUtils.uint16ArrayToString(arrayBuffer);
-          expect(actual).to.eql(strBuffer);
+          proclaim.strictEqual(actual, strBuffer);
         });
       });
     }

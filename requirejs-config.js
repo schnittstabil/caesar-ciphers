@@ -1,11 +1,20 @@
 requirejs.config({
   paths: {
-    chai: 'node_modules/chai/chai',
-  //   mocha: 'node_modules/mocha/mocha'
+    proclaim: 'node_modules/proclaim/lib/proclaim',
+    mocha: 'node_modules/mocha/mocha'
   },
   shim: {
-    'chai':{
-      exports: 'chai'
+    proclaim: {
+      exports: 'proclaim'
+    },
+    mocha: {
+      exports: 'mocha',
+      init: function(){
+        mocha.setup({
+          ui: 'bdd'
+        });
+        return this.mocha;
+      }
     }
   }
 });

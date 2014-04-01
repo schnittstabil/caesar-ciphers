@@ -59,7 +59,6 @@
   "devDependencies": {
     "almond": "~0.2.9",
     "amdefine": "~0.1.0",
-    "chai": "~1.9.1",
     "grunt": "~0.4.4",
     "grunt-contrib-clean": "~0.5.0",
     "grunt-contrib-copy": "~0.5.0",
@@ -70,8 +69,9 @@
     "grunt-mocha-istanbul": "~1.2.0",
     "grunt-mocha-test": "~0.10.0",
     "mocha": "~1.18.2",
-    "requirejs": "~2.1.11",
-    "time-grunt": "~0.3.1"
+    "proclaim": "~2.0.0",
+    "time-grunt": "~0.3.1",
+    "requirejs": "~2.1.11"
   },
   "dependencies": {
     "yargs": "~1.2.1"
