@@ -38,7 +38,8 @@
     "caesar-ciphers": "bin/caesar-ciphers.js"
   },
   "testling": {
-    "html": "test/mocha.html",
+    "html": "test/index.html",
+    "preprocess": "node_modules/.bin/grunt dist",
     "browsers": [
       "ie/6..latest",
       "chrome/28..latest",
@@ -51,7 +52,7 @@
     ]
   },
   "scripts": {
-    "test": "grunt testall"
+    "test": "grunt test-all"
   },
   "engines": {
     "node": ">= 0.8.0"
@@ -60,18 +61,19 @@
     "almond": "~0.2.9",
     "amdefine": "~0.1.0",
     "grunt": "~0.4.4",
+    "grunt-cli": "~0.1.13",
     "grunt-contrib-clean": "~0.5.0",
     "grunt-contrib-copy": "~0.5.0",
     "grunt-contrib-jshint": "~0.8.0",
     "grunt-contrib-requirejs": "~0.4.3",
     "grunt-contrib-watch": "~0.5.3",
     "grunt-githooks": "~0.3.1",
-    "grunt-mocha-istanbul": "~1.2.0",
     "grunt-mocha-test": "~0.10.0",
     "mocha": "~1.18.2",
     "proclaim": "~2.0.0",
     "requirejs": "~2.1.11",
-    "time-grunt": "~0.3.1"
+    "time-grunt": "~0.3.1",
+    "glob": "~3.2.9"
   },
   "dependencies": {
     "yargs": "~1.2.1"

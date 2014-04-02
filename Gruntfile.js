@@ -1,9 +1,12 @@
 'use strict';
 
+// var glob = require('glob'),
+//     srcs = glob.sync('lib/**/*.js'),
+//     tests = glob.sync('./**/*_test.js', 'test/lib');
+
 module.exports = function(grunt) {
   // Report the elapsed execution time of tasks.
   require('time-grunt')(grunt);
-
   // Project configuration.
   grunt.initConfig({
     pkg: grunt.file.readJSON('package.json'),
@@ -35,31 +38,49 @@ module.exports = function(grunt) {
       },
     },
     requirejs: {
-      compile: {
+      'dist-amd': {
         options: {
-          name: '../node_modules/almond/almond',
+          baseUrl: './lib',
+          name: 'caesar-ciphers',
+          out: './dist/caesar-ciphers.amd.js',
           optimize: 'none',
           // optimize: 'uglify2',
           // generateSourceMaps: true,
           // preserveLicenseComments: false,
-          out: './dist/caesar-ciphers.min.js',
-          addDir: './lib',
-          baseUrl: './lib',
-          mainConfigFile: './requirejs-config.js',
-          include: ['caesar-ciphers'],
         },
       },
-      // 'compile-test': {
-      //   options: {
-      //     name: './node_modules/almond/almond',
-      //     optimize: 'none',
-      //     out: './dist/caesar-ciphers_tests.js',
-      //     addDir: './lib',
-      //     baseUrl: './',
-      //     mainConfigFile: './requirejs-config.js',
-      //     include: ['./test/mocha-browser']
-      //   },
-      // },
+      'dist-global': {
+        options: {
+          baseUrl: './lib',
+          name: '../node_modules/almond/almond',
+          include: ['caesar-ciphers'],
+          out: './dist/caesar-ciphers.js',
+          wrap: {
+            startFile: 'build/wrap.global.start.frag',
+            endFile: 'build/wrap.global.end.frag'
+          },
+          optimize: 'none',
+          // optimize: 'uglify2',
+          // generateSourceMaps: true,
+          // preserveLicenseComments: false,
+        },
+      },
+      'dist-amd.global': {
+        options: {
+          baseUrl: './lib',
+          name: '../node_modules/almond/almond',
+          include: ['caesar-ciphers'],
+          out: './dist/caesar-ciphers.amd.global.js',
+          wrap: {
+            startFile: 'build/wrap.amd.global.start.frag',
+            endFile: 'build/wrap.amd.global.end.frag'
+          },
+          optimize: 'none',
+          // optimize: 'uglify2',
+          // generateSourceMaps: true,
+          // preserveLicenseComments: false,
+        },
+      },
     },
     mochaTest: {
       bin: {
@@ -152,12 +173,18 @@ module.exports = function(grunt) {
     }
   }
 
+  // (optional) doc task
   grunt.loadNpmTasks('grunt-contrib-yuidoc');
   grunt.registerTask('doc', function(){
     if(!grunt.file.exists('./node_modules/grunt-contrib-yuidoc')){
       grunt.log.error(
         'Install Npm module first:\n'+
         '\tnpm install grunt-contrib-yuidoc'
+      );
+    }else if(!grunt.file.exists('./node_modules/grunt-mocha-istanbul')){
+      grunt.log.error(
+        'Install Npm module first:\n'+
+        '\tnpm install grunt-mocha-istanbul'
       );
     }else{
       grunt.task.run(['clean:doc', 'yuidoc']);
@@ -168,9 +195,9 @@ module.exports = function(grunt) {
   grunt.registerTask('dist', ['clean', 'requirejs']);
   grunt.registerTask('lint', ['jshint']);
   grunt.registerTask('test', ['mochaTest:lib']);
-  grunt.registerTask('testall', ['mochaTest']);
+  grunt.registerTask('test-all', ['mochaTest']);
 
   // Default task.
-  grunt.registerTask('default', ['lint', 'testall', 'dist']);
+  grunt.registerTask('default', ['lint', 'test-all', 'dist']);
 
 };

@@ -1,7 +1,7 @@
 /* istanbul ignore else */
 if (typeof define !== 'function') { var define = require('amdefine')(module); }
 
-define(['../../lib/caesar-ciphers', '../fixture-suite', 'proclaim', 'mocha'],
+define(['../../lib/caesar-ciphers', '../fixture-suite', 'proclaim'],
   function(caesarCiphers, FixtureSuite, proclaim) {
     'use strict';
 
@@ -27,5 +27,10 @@ define(['../../lib/caesar-ciphers', '../fixture-suite', 'proclaim', 'mocha'],
       });
     });
 
+    describe('id of caesarCiphers default implementation', function(){
+      it('should equals caesarCiphers defaultId', function(){
+        proclaim.equal(caesarCiphers.get().id, caesarCiphers.getDefaultId());
+      });
+    });
   }
 );

@@ -27,7 +27,7 @@ define(
 
     var tests = {
       defaults: [],
-      full: [],
+      full: []
     };
 
     tests.defaults = [

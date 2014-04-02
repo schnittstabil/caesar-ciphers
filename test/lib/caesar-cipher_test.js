@@ -1,7 +1,7 @@
 /* istanbul ignore else */
 if (typeof define !== 'function') { var define = require('amdefine')(module); }
 
-define(['../../lib/caesar-cipher', 'proclaim', 'mocha'],
+define(['../../lib/caesar-ciphers/caesar-cipher', 'proclaim'],
   function(CaesarCipher, proclaim) {
     'use strict';
 
@@ -12,6 +12,13 @@ define(['../../lib/caesar-cipher', 'proclaim', 'mocha'],
           proclaim.throws(
             function(){
               new CaesarCipher('xx');
+            }
+          );
+        });
+        it('the setter should throw an exception', function(){
+          proclaim.throws(
+            function(){
+              new CaesarCipher().setShift('yy');
             }
           );
         });
