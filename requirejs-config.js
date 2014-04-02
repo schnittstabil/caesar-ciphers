@@ -10,7 +10,7 @@ requirejs.config({
     mocha: {
       exports: 'mocha',
       init: function(){
-        mocha.setup({
+        this.mocha.setup({
           ui: 'bdd'
         });
         return this.mocha;
