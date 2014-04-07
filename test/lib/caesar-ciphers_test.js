@@ -6,30 +6,17 @@ define(['../../lib/caesar-ciphers', '../fixture-suite', 'proclaim', 'mocha'],
     'use strict';
 
     var suite = new FixtureSuite(
-          function(cipherName, method, shift, input, done){
-            var caesarCipher = new (caesarCiphers.get(cipherName))(shift);
+          function(Cipher, method, shift, input, done){
+            var caesarCipher = new Cipher(shift);
             done(caesarCipher[method](input));
           }
         );
 
-    suite.describeCiphers('api', caesarCiphers.getIds());
+    suite.describeCiphers('api', caesarCiphers.supportedCiphers);
 
-    describe('caesarCiphers defaultId', function(){
-      it('should be valid', function(){
-        proclaim.includes(caesarCiphers.getIds(), caesarCiphers.getDefaultId());
-      });
-    });
-
-    describe('caesarCiphers defaultId', function(){
-      it('should reference default implementation', function(){
-        var id = caesarCiphers.getDefaultId();
-        proclaim.equal(caesarCiphers.get(id), caesarCiphers.get());
-      });
-    });
-
-    describe('id of caesarCiphers default implementation', function(){
-      it('should equals caesarCiphers defaultId', function(){
-        proclaim.equal(caesarCiphers.get().id, caesarCiphers.getDefaultId());
+    describe('caesarCiphers defaultCipher', function(){
+      it('should be supported by the environment', function(){
+        proclaim.ok(caesarCiphers.defaultCipher.isSupported());
       });
     });
   }

@@ -34,10 +34,10 @@ define(['../../lib/caesar-ciphers/caesar-cipher', 'proclaim', 'mocha'],
         );
       });
 
-      it('should not implement isEnabled', function(){
+      it('should not implement isSupported', function(){
         proclaim.throws(
           function(){
-            new CaesarCipher().isEnabled();
+            new CaesarCipher().isSupported();
           },
           /implemented/
         );

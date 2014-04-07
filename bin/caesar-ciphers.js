@@ -21,7 +21,7 @@ var argv = require('yargs')
   .describe('d', 'set debug mode')
   .options('i', {
     alias: 'implemenation',
-    default: caesarCiphers.getDefaultId(),
+    default: caesarCiphers.defaultCipher.id,
   })
   .check(function(argv){
     // check command
@@ -36,7 +36,7 @@ var argv = require('yargs')
         throw('Not enough non-option arguments: missing text');
       }
       // check implementation option
-      argv.cipher = caesarCiphers.get(argv.implemenation);
+      argv.cipher = caesarCiphers.ciphers[argv.implemenation];
       if(typeof argv.cipher === 'undefined'){
         throw('unknown implementation: ' + argv.implemenation);
       }
@@ -67,7 +67,7 @@ try{
   case 'list':
     console.log('Cipher Implementations:');
     console.log('=======================');
-    caesarCiphers.getIds().forEach(function(id){
+    caesarCiphers.supportedCiphers.forEach(function(id){
       console.log(id);
     });
     break;

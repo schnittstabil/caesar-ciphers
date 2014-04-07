@@ -5,8 +5,8 @@ var execFile = require('child_process').execFile,
   FixtureSuite = require('../fixture-suite'),
   proclaim = require('proclaim'),
   suite = new FixtureSuite(
-    function(cipherName, method, shift, input, done){
-      var args =  ['--implemenation='+cipherName, '--shift='+shift, method,
+    function(Cipher, method, shift, input, done){
+      var args =  ['--implemenation='+Cipher.id, '--shift='+shift, method,
                     input];
       execFile('./bin/caesar-ciphers.js', args,
         function(error, stdout, stderr){
@@ -20,4 +20,4 @@ var execFile = require('child_process').execFile,
     }
   );
 
-suite.describeCiphers('cli', caesarCiphers.getIds());
+suite.describeCiphers('cli', caesarCiphers.supportedCiphers);

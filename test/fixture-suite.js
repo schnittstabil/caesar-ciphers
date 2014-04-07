@@ -24,8 +24,8 @@ define(['proclaim', './fixtures'],
       var that = this;
 
       /** @function */
-      that.describeCipherMethod = function(cipherName, method,
-        input, shift, output){
+      that.describeCipherMethod = function(Cipher, method, input, shift,
+          output){
 
         var desc = method + 'ing "' + input + '" with shift ' + shift,
             actual;
@@ -33,7 +33,7 @@ define(['proclaim', './fixtures'],
 
         describe(desc, function(){
           beforeEach(function(done){
-            cipherPromiseBuilder(cipherName, method, shift, input,
+            cipherPromiseBuilder(Cipher, method, shift, input,
               function(result){
                 actual = result;
                 done();
@@ -47,32 +47,34 @@ define(['proclaim', './fixtures'],
         });
       };
 
-      that.describeTestFixture = function(cipherName, testFixture){
-        that.describeCipherMethod(cipherName, 'encrypt', testFixture.encrypting,
+      that.describeTestFixture = function(Cipher, testFixture){
+        that.describeCipherMethod(Cipher, 'encrypt', testFixture.encrypting,
           testFixture.withShift, testFixture.returns);
-        that.describeCipherMethod(cipherName, 'decrypt', testFixture.returns,
+        that.describeCipherMethod(Cipher, 'decrypt', testFixture.returns,
           testFixture.withShift, testFixture.encrypting);
       };
 
-      that.describeTestFixtures = function(cipherName, testFixtures){
+      that.describeTestFixtures = function(Cipher, testFixtures){
         testFixtures = testFixtures || fixtures.defaults;
-        describe(cipherName, function(){
+        describe(Cipher.id, function(){
           for(var i=0, len=testFixtures.length; i<len; i++){
-            that.describeTestFixture(cipherName, testFixtures[i]);
+            that.describeTestFixture(Cipher, testFixtures[i]);
           }
         });
       };
 
       /**
        * @param {string} description
-       * @param {Array.<?>} cipherNames
+       * @param {Array.<?>} ciphers
        * @param {testFixtures} testFixtures
        */
-      that.describeCiphers = function(description, cipherNames, testFixtures){
+      that.describeCiphers = function(description, ciphers, testFixtures){
         testFixtures = testFixtures || fixtures.defaults;
         describe(description, function(){
-          for(var i=0, len=cipherNames.length; i<len; i++){
-            that.describeTestFixtures(cipherNames[i]);
+          var ciphernames = Object.keys(ciphers),
+              i, len;
+          for(i=0, len= ciphernames.length; i<len; i++){
+            that.describeTestFixtures(ciphers[ciphernames[i]]);
           }
         });
       };
