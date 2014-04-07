@@ -7,6 +7,31 @@
 module.exports = function(grunt) {
   // Report the elapsed execution time of tasks.
   require('time-grunt')(grunt);
+
+    var browsers = [{
+        browserName: 'firefox',
+        version: '19',
+        platform: 'XP'
+    }, {
+        browserName: 'chrome',
+        platform: 'XP'
+    }, {
+        browserName: 'chrome',
+        platform: 'linux'
+    }, {
+        browserName: 'internet explorer',
+        platform: 'XP',
+        version: '6'
+    }, {
+        browserName: 'internet explorer',
+        platform: 'WIN8',
+        version: '10'
+    }, {
+        browserName: 'internet explorer',
+        platform: 'VISTA',
+        version: '9'
+    }];
+
   // Project configuration.
   grunt.initConfig({
     pkg: grunt.file.readJSON('package.json'),
@@ -82,6 +107,14 @@ module.exports = function(grunt) {
         },
       },
     },
+    connect: {
+      server: {
+        options: {
+          base: '',
+          port: 9999,
+        },
+      },
+    },
     mochaTest: {
       bin: {
         options: {
@@ -101,6 +134,19 @@ module.exports = function(grunt) {
         },
         src: ['test/**/*_slow_test.js']
       },
+    },
+    'saucelabs-mocha': {
+      all: {
+        options: {
+          urls: ['http://127.0.0.1:9999/test/index-spec.html'],
+          tunnelTimeout: 5,
+          build: process.env.TRAVIS_JOB_ID,
+          concurrency: 3,
+          browsers: browsers,
+          testname: 'mocha tests',
+          tags: ['master']
+        }
+      }
     },
     yuidoc: {
       compile: {
@@ -192,10 +238,12 @@ module.exports = function(grunt) {
   });
 
   // Alias tasks.
+  grunt.registerTask('dev', ['connect', 'watch']);
   grunt.registerTask('dist', ['clean', 'requirejs']);
   grunt.registerTask('lint', ['jshint']);
-  grunt.registerTask('test', ['mochaTest:lib']);
-  grunt.registerTask('test-all', ['mochaTest']);
+  grunt.registerTask('test', ['connect', 'saucelabs-mocha']);
+  grunt.registerTask('test-lib', ['mochaTest:lib']);
+  grunt.registerTask('test-all', ['test', 'mochaTest:bin']);
 
   // Default task.
   grunt.registerTask('default', ['lint', 'test-all', 'dist']);

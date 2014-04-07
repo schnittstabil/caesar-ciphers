@@ -1,5 +1,7 @@
 [![Build Status](https://secure.travis-ci.org/schnittstabil/caesar-ciphers.svg)](http://travis-ci.org/schnittstabil/caesar-ciphers) [![Dependency Status](https://david-dm.org/schnittstabil/caesar-ciphers.png)](https://david-dm.org/schnittstabil/caesar-ciphers) [![Built with Grunt](https://cdn.gruntjs.com/builtwith.png)](http://gruntjs.com/) [![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/schnittstabil/caesar-ciphers/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
 
+[![Selenium Test Status](https://saucelabs.com/browser-matrix/schnittstabil.svg)](https://saucelabs.com/u/schnittstabil)
+
 caesar-ciphers
 ==============
 

@@ -1,7 +1,7 @@
 /* istanbul ignore else */
 if (typeof define !== 'function') { var define = require('amdefine')(module); }
 
-define(['../../lib/caesar-ciphers/string-utils', 'proclaim'],
+define(['../../lib/caesar-ciphers/string-utils', 'proclaim', 'mocha'],
   function(stringUtils, proclaim) {
     'use strict';
 
