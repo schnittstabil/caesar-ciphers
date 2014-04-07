@@ -39,7 +39,6 @@
   },
   "testling": {
     "html": "test/index.html",
-    "preprocess": "node_modules/.bin/grunt dist",
     "browsers": [
       "ie/6..latest",
       "chrome/28..latest",
@@ -52,7 +51,7 @@
     ]
   },
   "scripts": {
-    "test": "grunt test-all"
+    "test": "grunt test"
   },
   "engines": {
     "node": ">= 0.8.0"
@@ -61,7 +60,6 @@
     "almond": "~0.2.9",
     "amdefine": "~0.1.0",
     "grunt": "~0.4.4",
-    "grunt-cli": "~0.1.13",
     "grunt-contrib-clean": "~0.5.0",
     "grunt-contrib-copy": "~0.5.0",
     "grunt-contrib-jshint": "~0.10.0",

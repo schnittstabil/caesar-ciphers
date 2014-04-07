@@ -24,12 +24,32 @@ module.exports = function(grunt) {
         version: '6'
     }, {
         browserName: 'internet explorer',
-        platform: 'WIN8',
-        version: '10'
+        platform: 'WIN8.1',
+        version: '11'
     }, {
         browserName: 'internet explorer',
         platform: 'VISTA',
         version: '9'
+    }, {
+        browserName: 'iphone',
+        platform: 'OS X 10.6',
+        version: '4'
+    }, {
+        browserName: 'ipad',
+        platform: 'OS X 10.9',
+        version: '7.1'
+    }, {
+        browserName: 'android',
+        platform: 'Linux',
+        version: '4.0'
+    }, {
+        browserName: 'android',
+        platform: 'Linux',
+        version: '4.3'
+    }, {
+        browserName: 'opera',
+        platform: 'WIN7',
+        version: '11'
     }];
 
   // Project configuration.
@@ -207,7 +227,7 @@ module.exports = function(grunt) {
     githooks: {
       all: {
         // Will run the jshint and test tasks at every commit
-        'pre-commit': 'default'
+        'pre-commit': ['lint', 'dist', 'test-local']
       }
     },
   });
@@ -241,11 +261,12 @@ module.exports = function(grunt) {
   grunt.registerTask('dev', ['connect', 'watch']);
   grunt.registerTask('dist', ['clean', 'requirejs']);
   grunt.registerTask('lint', ['jshint']);
-  grunt.registerTask('test', ['connect', 'saucelabs-mocha']);
-  grunt.registerTask('test-lib', ['mochaTest:lib']);
-  grunt.registerTask('test-all', ['test', 'mochaTest:bin']);
+  grunt.registerTask('test-remote', ['connect', 'saucelabs-mocha']);
+  grunt.registerTask('test-local', ['mochaTest']);
+  grunt.registerTask('test-local-lib', ['mochaTest:lib']);
+  grunt.registerTask('test', ['test-remote']);
 
   // Default task.
-  grunt.registerTask('default', ['lint', 'test-all', 'dist']);
+  grunt.registerTask('default', ['lint', 'test-local', 'dist']);
 
 };
