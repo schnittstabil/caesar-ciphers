@@ -12,9 +12,8 @@ define(
     }catch(err){
       if(typeof TraceKit !== 'undefined'){
         TraceKit.report(err);
-      }else{
-        throw err;
       }
+      throw err;
     }
   }
 );

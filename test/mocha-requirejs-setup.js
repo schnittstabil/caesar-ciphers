@@ -40,5 +40,4 @@ define(function(){
       'test/lib/test-runner'
     ]
   );
-
 });
