@@ -6,15 +6,14 @@ define(
     './caesar-ciphers_test',
     './string-utils_test'
   ],
-  function(mocha){
+  function testRunner(mocha){
     try{
       mocha.run();
     }catch(err){
       if(typeof TraceKit !== 'undefined'){
         TraceKit.report(err);
-      }else{
-        throw err;
       }
+      throw err;
     }
   }
 );
