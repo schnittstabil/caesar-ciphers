@@ -30,8 +30,13 @@ define(function(){
   });
 
   if(typeof TraceKit !== 'undefined'){
-    requirejs.onError = function (err) {
-      TraceKit.report(err);
+    requirejs.onError = function requirejsOnError(err) {
+      try{
+        throw err;
+      }catch(err){
+        TraceKit.report(err);
+      }
+      throw err;
     };
   }
 
