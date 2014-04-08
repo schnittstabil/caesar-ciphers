@@ -19,5 +19,12 @@ define(['../../lib/caesar-ciphers', '../fixture-suite', 'proclaim', 'mocha'],
         proclaim.ok(caesarCiphers.defaultCipher.isSupported());
       });
     });
+
+    describe('caesarCiphers defaultCipher', function(){
+      it('should be in caesarCiphers.supportedCiphers', function(){
+        var id = caesarCiphers.defaultCipher.id;
+        proclaim.ok(caesarCiphers.supportedCiphers.hasOwnProperty(id));
+      });
+    });
   }
 );

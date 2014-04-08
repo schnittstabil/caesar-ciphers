@@ -9,17 +9,10 @@ define(
   ],
   function testRunner(mocha){
     try{
+      var failedTests = [];
       var runner = mocha.run();
 
-
-      var failedTests = [];
-      runner.on('end', function(){
-        window.mochaResults = runner.stats;
-        window.mochaResults.reports = failedTests;
-      });
-
       runner.on('fail', function logFailure(test, err){
-
         var flattenTitles = function(test){
           var titles = [];
           while (test.parent.title){
@@ -38,13 +31,26 @@ define(
         });
       });
 
-
+      runner.on('end', function(){
+        var preReports = [],
+            reports = failedTests,
+            results;
+        if(window.mochaResults){
+          preReports = window.mochaResults.reports || [];
+        }
+        results = runner.stats;
+        results.reports = preReports.concat(reports);
+        results.tests += preReports.length;
+        results.failures += preReports.length;
+        window.mochaResults = results;
+      });
 
     }catch(err){
       if(typeof TraceKit !== 'undefined'){
         TraceKit.report(err);
+      }else{
+        throw err;
       }
-      throw err;
     }
   }
 );

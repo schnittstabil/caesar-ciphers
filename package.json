@@ -40,14 +40,8 @@
   "testling": {
     "html": "test/index.html",
     "browsers": [
-      "ie/6..latest",
-      "chrome/28..latest",
-      "firefox/20..latest",
-      "safari/4..latest",
-      "iphone/6..latest",
-      "ipad/6..latest",
-      "opera/10..latest",
-      "android-browser/4.2..latest"
+      "safari/4",
+      "opera/10..11.6"
     ]
   },
   "scripts": {

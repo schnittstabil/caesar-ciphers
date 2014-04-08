@@ -6,7 +6,7 @@ define(['../../lib/caesar-ciphers/string-utils', 'proclaim', 'mocha'],
     'use strict';
 
     /* istanbul ignore else */
-    if(stringUtils.uint16ArrayToString.isSupported(Uint16Array)){
+    if(stringUtils.uint16ArrayToString.isSupported()){
       describe('Converting Uint16Array', function(){
         it('should work for small Buffers', function(){
           var len = 1000,

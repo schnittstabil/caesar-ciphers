@@ -21,7 +21,7 @@ var argv = require('yargs')
   .describe('d', 'set debug mode')
   .options('i', {
     alias: 'implemenation',
-    default: caesarCiphers.defaultCipher.id,
+    default: caesarCiphers.defaultCipher.id
   })
   .check(function(argv){
     // check command
@@ -67,9 +67,11 @@ try{
   case 'list':
     console.log('Cipher Implementations:');
     console.log('=======================');
-    caesarCiphers.supportedCiphers.forEach(function(id){
-      console.log(id);
-    });
+    for(var ciphername in caesarCiphers.supportedCiphers){
+      if (caesarCiphers.supportedCiphers.hasOwnProperty(ciphername)) {
+        console.log(ciphername);
+      }
+    }
     break;
   }
 }catch(err){

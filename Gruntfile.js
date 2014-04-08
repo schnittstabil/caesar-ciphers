@@ -34,12 +34,24 @@ module.exports = function(grunt) {
         version: '6'
     }, {
         browserName: 'internet explorer',
-        platform: 'WIN8.1',
-        version: '11'
+        platform: 'XP',
+        version: '7'
+    }, {
+        browserName: 'internet explorer',
+        platform: 'WIN7',
+        version: '8'
     }, {
         browserName: 'internet explorer',
         platform: 'VISTA',
         version: '9'
+    }, {
+        browserName: 'internet explorer',
+        platform: 'WIN7',
+        version: '10'
+    }, {
+        browserName: 'internet explorer',
+        platform: 'WIN8.1',
+        version: '11'
     }, {
         browserName: 'iphone',
         platform: 'OS X 10.6',
@@ -60,6 +72,22 @@ module.exports = function(grunt) {
         browserName: 'opera',
         platform: 'WIN7',
         version: '11'
+    }, {
+        browserName: 'opera',
+        platform: 'WIN7',
+        version: '12'
+    }, {
+        browserName: 'safari',
+        platform: 'OS X 10.6',
+        version: '5'
+    }, {
+        browserName: 'safari',
+        platform: 'OS X 10.8',
+        version: '6'
+    }, {
+        browserName: 'safari',
+        platform: 'OS X 10.9',
+        version: '7'
     }];
 
   // Project configuration.
@@ -90,7 +118,7 @@ module.exports = function(grunt) {
       },
       doc: {
         src: ['<%= pkg.directories.dist %>/doc']
-      },
+      }
     },
     requirejs: {
       'dist-amd': {
@@ -98,11 +126,11 @@ module.exports = function(grunt) {
           baseUrl: './lib',
           name: 'caesar-ciphers',
           out: './dist/caesar-ciphers.amd.js',
-          optimize: 'none',
+          optimize: 'none'
           // optimize: 'uglify2',
           // generateSourceMaps: true,
           // preserveLicenseComments: false,
-        },
+        }
       },
       'dist-global': {
         options: {
@@ -114,11 +142,11 @@ module.exports = function(grunt) {
             startFile: 'build/wrap.global.start.frag',
             endFile: 'build/wrap.global.end.frag'
           },
-          optimize: 'none',
+          optimize: 'none'
           // optimize: 'uglify2',
           // generateSourceMaps: true,
           // preserveLicenseComments: false,
-        },
+        }
       },
       'dist-amd.global': {
         options: {
@@ -130,40 +158,40 @@ module.exports = function(grunt) {
             startFile: 'build/wrap.amd.global.start.frag',
             endFile: 'build/wrap.amd.global.end.frag'
           },
-          optimize: 'none',
+          optimize: 'none'
           // optimize: 'uglify2',
           // generateSourceMaps: true,
           // preserveLicenseComments: false,
-        },
-      },
+        }
+      }
     },
     connect: {
       server: {
         options: {
           base: '',
-          port: 9999,
-        },
-      },
+          port: 9999
+        }
+      }
     },
     mochaTest: {
       bin: {
         options: {
-          reporter: 'dot',
+          reporter: 'dot'
         },
         src: ['test/bin/**/*_test.js', '!test/**/*_slow_test.js']
       },
       lib: {
         options: {
-          reporter: 'dot',
+          reporter: 'dot'
         },
         src: ['test/lib/*_test.js', '!test/**/*_slow_test.js']
       },
       slow: {
         options: {
-          reporter: 'dot',
+          reporter: 'dot'
         },
         src: ['test/**/*_slow_test.js']
-      },
+      }
     },
     'saucelabs-mocha': {
       all: {
@@ -186,18 +214,21 @@ module.exports = function(grunt) {
         url: '<%= pkg.homepage %>',
         options: {
           paths: 'lib/',
-          outdir: '<%= pkg.directories.dist %>/doc/api',
-        },
-      },
+          outdir: '<%= pkg.directories.dist %>/doc/api'
+        }
+      }
     },
     jshint: {
       options: {
-        jshintrc: '.jshintrc',
+        jshintrc: '.jshintrc'
       },
       gruntfile: {
         src: 'Gruntfile.js'
       },
       bin: {
+        options: {
+          jshintrc: 'bin/.jshintrc'
+        },
         src: ['bin/**/*.js']
       },
       lib: {
@@ -205,10 +236,10 @@ module.exports = function(grunt) {
       },
       test: {
         options: {
-          jshintrc: 'test/.jshintrc',
+          jshintrc: 'test/.jshintrc'
         },
         src: ['test/**/*.js', '!test/bower_components/**']
-      },
+      }
     },
     watch: {
       gruntfile: {
@@ -239,7 +270,7 @@ module.exports = function(grunt) {
         // Will run the jshint and test tasks at every commit
         'pre-commit': ['lint', 'dist', 'test-local']
       }
-    },
+    }
   });
 
   // load grunt tasks

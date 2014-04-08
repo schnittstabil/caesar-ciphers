@@ -4,6 +4,12 @@ define(function(){
 /* global requirejs, TraceKit, reporter */
 
   // requirejs setup
+  if(typeof TraceKit !== 'undefined'){
+    requirejs.onError = function requirejsOnError(err){
+      TraceKit.report(err);
+    };
+  }
+
   requirejs.config({
     enforceDefine: true,
     baseUrl: '../',
@@ -28,17 +34,6 @@ define(function(){
     },
     deps: ['mocha']
   });
-
-  if(typeof TraceKit !== 'undefined'){
-    requirejs.onError = function requirejsOnError(err) {
-      try{
-        throw err;
-      }catch(err){
-        TraceKit.report(err);
-      }
-      throw err;
-    };
-  }
 
   require(
     [

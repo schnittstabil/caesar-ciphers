@@ -71,10 +71,10 @@ define(['proclaim', './fixtures'],
       that.describeCiphers = function(description, ciphers, testFixtures){
         testFixtures = testFixtures || fixtures.defaults;
         describe(description, function(){
-          var ciphernames = Object.keys(ciphers),
-              i, len;
-          for(i=0, len= ciphernames.length; i<len; i++){
-            that.describeTestFixtures(ciphers[ciphernames[i]]);
+          for(var ciphername in ciphers){
+            if (ciphers.hasOwnProperty(ciphername)) {
+              that.describeTestFixtures(ciphers[ciphername]);
+            }
           }
         });
       };

@@ -3,6 +3,7 @@ if (typeof define !== 'function') { var define = require('amdefine')(module); }
 
 define(['../../lib/caesar-ciphers/caesar-cipher', 'proclaim', 'mocha'],
   function(CaesarCipher, proclaim) {
+    /* jshint -W024 */
     'use strict';
 
     describe('Constructing Cipher', function(){

@@ -12,6 +12,7 @@
   "eqeqeq":       true,
   "eqnull":       false,
   "es5":          false,
+  "es3":          true,
   "esnext":       false,
   "evil":         false,
   "expr":         false,
@@ -49,7 +50,7 @@
   "strict":       false,
   "sub":          false,
   "supernew":     false,
-  "trailing":     true,
+  "trailing":     false,
   "undef":        true,
   "unused":       true,
   "white":        false

@@ -1,12 +1,7 @@
 {
   "globals": {
     /* amdefine */
-    "define":     true,
-    /* MOCHA */
-    "before":     true,
-    "beforeEach": true,
-    "describe":   true,
-    "it":         true
+    "define":     true
   },
   "asi":          false,
   "bitwise":      true,
@@ -17,10 +12,10 @@
   "eqeqeq":       true,
   "eqnull":       false,
   "es5":          false,
-  "es3":          true,
+  "es3":          false,
   "esnext":       false,
   "evil":         false,
-  "expr":         true,  // prevents warning "Expected an assignment or function call and instead saw an expression."
+  "expr":         false,
   "forin":        true,
   "funcscope":    false,
   "globalstrict": false,
