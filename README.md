@@ -78,7 +78,7 @@ npm install caesar-ciphers --save
 
 ### Usage
 
-```bash
+```JavaScript
 var Cipher = require('caesar-ciphers').defaultCipher;
 var cipher = new Cipher(3);
 cipher.encrypt('abcdef@example.com');

@@ -1,6 +1,6 @@
 {
   "name": "caesar-ciphers",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Multiple implementations of the Caesar Cipher.",
   "homepage": "https://github.com/schnittstabil/caesar-ciphers",
   "keywords": [
