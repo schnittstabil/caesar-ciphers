@@ -1,4 +1,6 @@
-[![Build Status](https://secure.travis-ci.org/schnittstabil/caesar-ciphers.svg)](http://travis-ci.org/schnittstabil/caesar-ciphers) [![Dependency Status](https://david-dm.org/schnittstabil/caesar-ciphers.png)](https://david-dm.org/schnittstabil/caesar-ciphers) [![Built with Grunt](https://cdn.gruntjs.com/builtwith.png)](http://gruntjs.com/) [![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/schnittstabil/caesar-ciphers/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
+[![Build Status](https://secure.travis-ci.org/schnittstabil/caesar-ciphers.svg)](http://travis-ci.org/schnittstabil/caesar-ciphers) [![Dependency Status](https://david-dm.org/schnittstabil/caesar-ciphers.png)](https://david-dm.org/schnittstabil/caesar-ciphers) [![Built with Grunt](https://cdn.gruntjs.com/builtwith.png)](http://gruntjs.com/)
+
+[![NPM](https://nodei.co/npm/caesar-ciphers.png?mini=true)](https://nodei.co/npm/caesar-ciphers/)
 
 [![Selenium Test Status](https://saucelabs.com/browser-matrix/schnittstabil.svg)](https://saucelabs.com/u/schnittstabil)
 
@@ -17,53 +19,77 @@ Development Stage
 This software is in [pre-alpha stage](http://en.wikipedia.org/wiki/Software_release_life_cycle#Pre-alpha).
 
 
-How to build your own Caesar Ciphers
-------------------------------------
+Command Line Interface
+----------------------
 
-Get the source:
-
-```bash
-git clone git@github.com:schnittstabil/caesar-ciphers.git
-```
-
-Enter the directory and install the dependencies:
+### Installation
 
 ```bash
-cd caesar-ciphers
-npm install
+[sudo] npm install caesar-ciphers -g
 ```
 
-If necessary, also install grunt:
+### Usage
 
 ```bash
-npm install -g grunt-cli
-```
+$ caesar-ciphers --help
+Usage:
+   caesar-ciphers encrypt [options] text
+   caesar-ciphers enc     [options] text (same as encrypt)
+   caesar-ciphers decrypt [options] text
+   caesar-ciphers dec     [options] text (same as decrypt)
+   caesar-ciphers list    [options]      (list implementations)
 
-Setup the git hooks with grunt:
+
+Options:
+  -s, --shift          the shift parameter, i.e. the encryption key  [default: 1]
+  -d, --debug          set debug mode
+  -i, --implemenation                                                [default: "NodeBuffer"]
+```
 
 ```bash
-grunt githooks
+$ caesar-ciphers list
+Cipher Implementations:
+=======================
+StringAppend
+EffectiveStringBuilding
+TypedArrayBuffer
+NodeBuffer
 ```
-
-Run the tests:
 
 ```bash
-grunt test
+$ caesar-ciphers --shift 1 enc abcdef@example.com
+bcdefg@fybnqmf.dpn
 ```
 
-And at very the end:
+### Removal
 
 ```bash
-# build with grunt
-grunt
-
-# or auto-build whenever watched files change
-grunt watch
-
-# or start the dev-server and open http://localhost:8080/
-grunt dev-server
+[sudo] npm uninstall caesar-ciphers -g
 ```
 
+Node.js
+-------
+
+### Installation
+
+```bash
+npm install caesar-ciphers --save
+```
+
+### Usage
+
+```bash
+var Cipher = require('caesar-ciphers').defaultCipher;
+var cipher = new Cipher(3);
+cipher.encrypt('abcdef@example.com');
+// retuns 'defghi@hadpsoh.frp'
+```
+
+### Removal
+
+```bash
+npm uninstall caesar-ciphers
+```
 
 License
 -------
@@ -71,3 +97,5 @@ License
 Copyright (c) 2014 Michael Mayer
 
 Licensed under the MIT license.
+
+[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/schnittstabil/caesar-ciphers/trend.png)](https://bitdeli.com/free "Bitdeli Badge")

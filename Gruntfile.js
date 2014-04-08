@@ -305,7 +305,7 @@ module.exports = function(grunt) {
   grunt.registerTask('test-remote', ['connect', 'saucelabs-mocha']);
   grunt.registerTask('test-local', ['mochaTest']);
   grunt.registerTask('test-local-lib', ['mochaTest:lib']);
-  grunt.registerTask('test', ['test-remote']);
+  grunt.registerTask('test', ['test-local']);
 
   // Default task.
   grunt.registerTask('default', ['lint', 'test-local', 'dist']);
