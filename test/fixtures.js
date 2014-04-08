@@ -37,6 +37,11 @@ define(
         returns: 'abc'
       },
       {
+        encrypting: '1',
+        withShift: 1,
+        returns: '1'
+      },
+      {
         encrypting: ' ' + charRange('A','Z') + ' ' + charRange('a','z') + ' ',
         withShift: 1,
         returns: ' ' + charRange('B','Z')+'A ' + charRange('b','z') + 'a '
