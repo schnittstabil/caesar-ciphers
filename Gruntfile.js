@@ -121,18 +121,25 @@ module.exports = function(grunt) {
       }
     },
     requirejs: {
-      'dist-amd': {
+      'dist.amd': {
         options: {
           baseUrl: './lib',
           name: 'caesar-ciphers',
           out: './dist/caesar-ciphers.amd.js',
           optimize: 'none'
-          // optimize: 'uglify2',
-          // generateSourceMaps: true,
-          // preserveLicenseComments: false,
         }
       },
-      'dist-global': {
+      'dist.amd.min': {
+        options: {
+          baseUrl: './lib',
+          name: 'caesar-ciphers',
+          out: './dist/caesar-ciphers.amd.min.js',
+          optimize: 'uglify2',
+          generateSourceMaps: true,
+          preserveLicenseComments: false
+        }
+      },
+      'dist.global': {
         options: {
           baseUrl: './lib',
           name: '../node_modules/almond/almond',
@@ -143,12 +150,24 @@ module.exports = function(grunt) {
             endFile: 'build/wrap.global.end.frag'
           },
           optimize: 'none'
-          // optimize: 'uglify2',
-          // generateSourceMaps: true,
-          // preserveLicenseComments: false,
         }
       },
-      'dist-amd.global': {
+      'dist.global.min': {
+        options: {
+          baseUrl: './lib',
+          name: '../node_modules/almond/almond',
+          include: ['caesar-ciphers'],
+          out: './dist/caesar-ciphers.min.js',
+          wrap: {
+            startFile: 'build/wrap.global.start.frag',
+            endFile: 'build/wrap.global.end.frag'
+          },
+          optimize: 'uglify2',
+          generateSourceMaps: true,
+          preserveLicenseComments: false
+        }
+      },
+      'dist.amd.global': {
         options: {
           baseUrl: './lib',
           name: '../node_modules/almond/almond',
@@ -159,9 +178,21 @@ module.exports = function(grunt) {
             endFile: 'build/wrap.amd.global.end.frag'
           },
           optimize: 'none'
-          // optimize: 'uglify2',
-          // generateSourceMaps: true,
-          // preserveLicenseComments: false,
+        }
+      },
+      'dist.amd.global.min': {
+        options: {
+          baseUrl: './lib',
+          name: '../node_modules/almond/almond',
+          include: ['caesar-ciphers'],
+          out: './dist/caesar-ciphers.amd.global.min.js',
+          wrap: {
+            startFile: 'build/wrap.amd.global.start.frag',
+            endFile: 'build/wrap.amd.global.end.frag'
+          },
+          optimize: 'uglify2',
+          generateSourceMaps: true,
+          preserveLicenseComments: false
         }
       }
     },
