@@ -23,7 +23,21 @@
   ],
   "ignore": [
     ".*",
-    "*",
-    "**/.*"
+    "*~",
+    "**/.*",
+    "bin",
+    "bower_components",
+    "build",
+    "example/main.js",
+    "example/index-amd.global-amd.html",
+    "example/index-amd.html",
+    "example/index-requirejs.html",
+    "lib",
+    "node_modules",
+    "test",
+    "CONTRIBUTING.md",
+    "Gruntfile.js",
+    "index.js",
+    "package.json"
   ]
 }
