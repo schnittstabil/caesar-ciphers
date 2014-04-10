@@ -1,13 +1,35 @@
 {
   "name": "caesar-ciphers",
+  "main": "dist/*.js",
   "version": "0.1.2",
-  "main": "dist/*",
-  "ignore": [
-    "*",
-    "**/*"
+  "homepage": "https://github.com/schnittstabil/caesar-ciphers",
+  "authors": [
+    "Michael Mayer <michael@schnittstabil.de>"
   ],
-  "dependencies": {
-  },
-  "devDependencies": {
-  }
+  "description": "Multiple implementations of the Caesar Cipher.",
+  "moduleType": [
+    "amd",
+    "globals"
+  ],
+  "keywords": [
+    "ceasar",
+    "chipher"
+  ],
+  "license": "MIT",
+  "ignore": [
+    ".*",
+    "*~",
+    "**/.*",
+    "bin",
+    "bower_components",
+    "build",
+    "example",
+    "lib",
+    "node_modules",
+    "test",
+    "CONTRIBUTING.md",
+    "Gruntfile.js",
+    "index.js",
+    "package.json"
+  ]
 }
