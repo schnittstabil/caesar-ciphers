@@ -13,13 +13,13 @@
       input = document.getElementById('input'),
       shift = document.getElementById('shift'),
       output = document.getElementById('output'),
-      cipherIds = caesarCiphers.getIds(),
-      i, len, cipherId,
       currentCipher;
 
-  for(i=0, len=cipherIds.length; i<len; i++){
-    cipherId = cipherIds[i];
-    implementation.options.add(new Option(cipherId, cipherId));
+  for(var ciphername in caesarCiphers.supportedCiphers){
+    if (caesarCiphers.supportedCiphers.hasOwnProperty(ciphername)) {
+      implementation.options.add(new Option(ciphername, ciphername));
+      console.log(ciphername);
+    }
   }
 
   function updateOutput(){
@@ -30,7 +30,7 @@
     var shiftValue = Math.round(shift.value),
         Cipher;
     try{
-      Cipher = caesarCiphers.get(implementation.value);
+      Cipher = caesarCiphers.ciphers[implementation.value];
       currentCipher = new Cipher(shiftValue);
       console.log('updateCipher: ' + currentCipher.id + '(shift: ' + currentCipher.getShift() + ')');
     }catch(msg){
